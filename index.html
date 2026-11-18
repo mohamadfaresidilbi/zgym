@@ -120,6 +120,29 @@ html:not(.js) .loader{display:none}
 .row svg path{fill:none;stroke:var(--accent);stroke-width:14}
 .row.outline{color:transparent;-webkit-text-stroke:1.5px var(--stone)}
 
+/* why */
+.why{padding:clamp(5rem,12vw,10rem) var(--pad) clamp(2rem,5vw,4rem)}
+.lit{font-size:clamp(1.7rem,4.4vw,3.8rem);max-width:19em;margin-bottom:clamp(3rem,7vw,6rem);line-height:1.12}
+.js .lit span{opacity:.16;transition:opacity .45s}
+.js .lit span.on{opacity:1}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.2rem,2.5vw,2.5rem)}
+.why-grid div{position:relative;border-top:2px solid var(--line);padding-top:1.4rem}
+.why-grid div::before{content:"";position:absolute;left:0;top:-2px;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.2s var(--ease) var(--d,0s)}
+.why-grid div.in::before,html:not(.js) .why-grid div::before{transform:scaleX(1)}
+.js .why-grid div>*{opacity:0;transform:translateY(24px);transition:opacity .9s var(--out) var(--d,0s),transform .9s var(--out) var(--d,0s)}
+.js .why-grid div.in>*{opacity:1;transform:none}
+.why-grid h3{font-size:1.3rem;font-weight:600;line-height:1.25;margin-bottom:.6rem}
+.why-grid p{color:var(--stone)}
+@media (max-width:900px){.why-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.why-grid{grid-template-columns:1fr}}
+
+/* floating WhatsApp */
+.fab{position:fixed;right:calc(1.1rem + env(safe-area-inset-right,0px));bottom:calc(1.1rem + env(safe-area-inset-bottom,0px));z-index:75;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.45);transition:transform .35s var(--out)}
+.fab:hover{transform:scale(1.1) rotate(-8deg)}
+.fab svg{width:32px;height:32px;fill:#fff;position:relative}
+.fab::before{content:"";position:absolute;inset:0;border-radius:50%;background:#25d366;animation:ping 2.4s var(--out) infinite}
+@keyframes ping{from{transform:scale(1);opacity:.55}to{transform:scale(1.9);opacity:0}}
+
 /* zones */
 .intro{padding:clamp(5rem,12vw,10rem) var(--pad) clamp(2rem,5vw,4rem);display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:end}
 .intro h2{font-size:clamp(1.9rem,4.4vw,3.8rem)}
@@ -152,7 +175,7 @@ html:not(.js) .loader{display:none}
 /* schedule */
 .sched{background:var(--coal);padding:clamp(4rem,10vw,9rem) var(--pad);border-block:1px solid var(--line)}
 .sched-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:2.5rem}
-.sched h2,.plans h2{font-size:clamp(1.9rem,4.4vw,3.8rem)}
+.sched h2{font-size:clamp(1.9rem,4.4vw,3.8rem)}
 .tabs{display:flex;gap:.4rem;overflow-x:auto;max-width:100%;padding-bottom:4px}
 .tabs button{min-width:56px;min-height:48px;padding:.5rem 1rem;font-weight:600;color:var(--stone);position:relative;transition:color .3s}
 .tabs button::after{content:"";position:absolute;inset:0;background:var(--accent);transform:skewX(-14deg) scaleY(0);transform-origin:50% 100%;transition:transform .4s var(--out);z-index:0}
@@ -171,25 +194,6 @@ html:not(.js) .loader{display:none}
 .slots a{font-weight:600;border-bottom:2px solid var(--accent);padding:.6rem 0}
 @keyframes slot{from{opacity:0;transform:translateX(-30px)}}
 @media (max-width:700px){.slots li{grid-template-columns:5rem 1fr auto}.slots em{display:none}}
-
-/* plans */
-.plans{padding:clamp(4rem,10vw,9rem) var(--pad)}
-.plans h2{margin-bottom:3rem}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;perspective:1400px}
-.card{position:relative;padding:2.2rem 2rem 2rem;background:var(--concrete);display:flex;flex-direction:column;gap:1.4rem;transform-style:preserve-3d;transition:transform .5s var(--out);overflow:hidden}
-.card::after{content:"";position:absolute;width:60%;aspect-ratio:1;left:var(--mx,50%);top:var(--my,50%);transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(236,233,227,.13),transparent);opacity:0;transition:opacity .4s;pointer-events:none}
-.card:hover::after{opacity:1}
-.card.hot{background:var(--accent);color:var(--ink)}
-.card h3{font-size:1.5rem;font-weight:700}
-.price{font-size:clamp(2.6rem,4.4vw,3.6rem);font-weight:600;line-height:1;letter-spacing:-.04em}
-.price small{font-size:1rem;font-weight:500;letter-spacing:0;opacity:.7}
-.card ul{display:grid;gap:.7rem;flex:1}
-.card li{display:flex;gap:.7rem;align-items:baseline}
-.card li::before{content:"";width:14px;height:3px;background:currentColor;transform:skewX(-32deg) translateY(-4px);flex:none}
-.card .btn{align-self:flex-start}
-.card.hot .btn{background:var(--ink);color:var(--bone)}
-.card.hot .btn:hover{color:var(--ink)}
-@media (max-width:900px){.cards{grid-template-columns:1fr}}
 
 /* finale */
 .end{position:relative;padding:clamp(6rem,16vw,14rem) var(--pad);text-align:center;overflow:hidden;background:var(--coal);border-top:1px solid var(--line)}
@@ -210,7 +214,7 @@ footer a:hover{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .rv,.js .ln>span,.js .hero-side>*{opacity:1;transform:none}
-  .js .slash{clip-path:none}.js .paint path,.js .zmark path{stroke-dashoffset:0}
+  .js .slash{clip-path:none}.js .lit span,.js .why-grid div>*{opacity:1;transform:none}.why-grid div::before{transform:scaleX(1)}.js .paint path,.js .zmark path{stroke-dashoffset:0}
   .loader{display:none}.cur{display:none}
 }
 </style>
@@ -226,13 +230,13 @@ footer a:hover{color:var(--accent)}
     Z-GYM
   </a>
   <nav class="links" aria-label="Main">
-    <a href="#zones">Zones</a><a href="#classes">Classes</a><a href="#membership">Membership</a><a href="#visit">Visit</a>
+    <a href="#why">Why train</a><a href="#zones">Zones</a><a href="#classes">Classes</a><a href="#visit">Visit</a>
   </nav>
-  <a class="btn mag" href="#join"><span>Book a free tour</span></a>
+  <a class="btn mag wa" href="https://wa.me/" target="_blank" rel="noopener"><span>Book a free session</span></a>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
 </header>
 <nav class="menu" id="menu" aria-label="Mobile">
-  <a href="#zones">Zones</a><a href="#classes">Classes</a><a href="#membership">Membership</a><a href="#visit">Visit</a><a href="#join">Book a tour</a>
+  <a href="#why">Why train</a><a href="#zones">Zones</a><a href="#classes">Classes</a><a href="#visit">Visit</a><a class="wa" href="https://wa.me/" target="_blank" rel="noopener">Book a free session</a>
 </nav>
 
 <main id="top">
@@ -244,7 +248,7 @@ footer a:hover{color:var(--accent)}
     <div class="hero-side">
       <p>Spin studio, free weights, machines and cardio on one floor. Come in, put the work in, leave stronger.</p>
       <div class="cta-row">
-        <a class="btn mag" href="#join"><span>Book a free tour</span></a>
+        <a class="btn mag wa" href="https://wa.me/" target="_blank" rel="noopener"><span>Book a free session</span></a>
         <a class="btn ghost mag" href="#zones"><span>See the gym</span></a>
       </div>
     </div>
@@ -255,6 +259,16 @@ footer a:hover{color:var(--accent)}
 <section class="wall" aria-hidden="true">
   <div class="row display" data-dir="-1"></div>
   <div class="row display outline" data-dir="1"></div>
+</section>
+
+<section class="why" id="why" data-accent="#f6c61c">
+  <p class="lit display" id="lit">You only get one body. Every hour you put into it pays you back for the rest of your life.</p>
+  <div class="why-grid">
+    <div class="io"><h3>Stronger for longer</h3><p>The muscle and bone you build now carry you for decades: stairs, luggage, kids, all of it.</p></div>
+    <div class="io" style="--d:.12s"><h3>A clearer head</h3><p>A good session resets your day. You sleep deeper, focus longer and handle stress better.</p></div>
+    <div class="io" style="--d:.24s"><h3>More energy</h3><p>It sounds backwards, but spending energy makes more of it. Regular training lifts everything else you do.</p></div>
+    <div class="io" style="--d:.36s"><h3>Yours to keep</h3><p>Phones, cars and jobs come and go. What you put into your body stays with you.</p></div>
+  </div>
 </section>
 
 <div id="zones">
@@ -302,27 +316,12 @@ footer a:hover{color:var(--accent)}
   <ul class="slots" id="slots" aria-live="polite"></ul>
 </section>
 
-<section class="plans" id="membership" data-accent="#f6c61c">
-  <h2 class="display rv">Pick your<br>membership</h2>
-  <div class="cards">
-    <article class="card tilt rv"><h3>Day pass</h3><div class="price">$XX <small>/ visit</small></div>
-      <ul><li>Full gym floor</li><li>One group class</li><li>Lockers and showers</li></ul>
-      <a class="btn ghost" href="#join"><span>Get a day pass</span></a></article>
-    <article class="card hot tilt rv" style="--d:.1s"><h3>Monthly</h3><div class="price">$XX <small>/ month</small></div>
-      <ul><li>Unlimited gym access</li><li>All group classes</li><li>Spin studio included</li><li>Free intro session with a coach</li></ul>
-      <a class="btn" href="#join"><span>Join monthly</span></a></article>
-    <article class="card tilt rv" style="--d:.2s"><h3>Yearly</h3><div class="price">$XX <small>/ year</small></div>
-      <ul><li>Everything in Monthly</li><li>Best price per month</li><li>Membership freeze when you travel</li></ul>
-      <a class="btn ghost" href="#join"><span>Join yearly</span></a></article>
-  </div>
-</section>
-
 <section class="end" id="join" data-accent="#b7dc24">
   <svg class="zmark io" viewBox="0 0 82 100" aria-hidden="true"><path pathLength="1" d="M10 4 L64 46 L14 46 L72 96"/></svg>
   <h2 class="display rv">Until<br>it’s done.</h2>
-  <p class="rv" style="--d:.1s">Come see the gym before you commit. Message us, pick a time, and we’ll walk you around.</p>
+  <p class="rv" style="--d:.1s">Your first session is on us. Message us on WhatsApp, pick a time, and come try the gym.</p>
   <div class="cta-row rv" style="--d:.2s">
-    <a class="btn mag" href="https://wa.me/" target="_blank" rel="noopener"><span>Message us on WhatsApp</span></a>
+    <a class="btn mag wa" href="https://wa.me/" target="_blank" rel="noopener"><span>Book a free session</span></a>
     <a class="btn ghost mag" href="https://www.instagram.com/zgym.me" target="_blank" rel="noopener"><span>@zgym.me on Instagram</span></a>
   </div>
 </section>
@@ -331,16 +330,28 @@ footer a:hover{color:var(--accent)}
 <footer id="visit">
   <div><a class="logo" href="#top"><svg viewBox="0 0 900 900" aria-hidden="true"><path class="ring" d="M161.1 166.1A405 405 0 0 1 773.9 693.2M738.9 733.9A405 405 0 0 1 106.2 236"/><path d="M152 147 612 432V474H366L760 718 722 742 290 474V432H536L128 179Z"/><rect x="137" y="368" width="38" height="158" rx="19"/><rect x="209" y="308" width="40" height="280" rx="20"/><rect x="650" y="310" width="40" height="282" rx="20"/><rect x="725" y="372" width="38" height="160" rx="19"/></svg>Z-GYM</a>
     <p style="color:var(--stone);margin-top:1rem;max-width:18rem">Invest in your body.</p></div>
-  <div><h4>Visit</h4><ul><li><span class="tbd">Add address</span></li><li><span class="tbd">Add phone</span></li></ul></div>
-  <div><h4>Hours</h4><ul><li>Mon–Fri <span class="tbd">add hours</span></li><li>Sat–Sun <span class="tbd">add hours</span></li></ul></div>
-  <div><h4>Follow</h4><ul><li><a href="https://www.instagram.com/zgym.me" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></li></ul></div>
+  <div><h4>Visit</h4><ul><li><a href="https://maps.app.goo.gl/etoEa139G3JvWWLdA" target="_blank" rel="noopener">Algeria Street, Beirut</a></li><li><a href="https://maps.app.goo.gl/etoEa139G3JvWWLdA" target="_blank" rel="noopener">Get directions</a></li><li><a href="tel:+9611350030">+961 1 350 030</a></li></ul></div>
+  <div><h4>Hours</h4><ul><li>Mon–Fri 11:00 AM – 9:30 PM</li><li>Sat 11:00 AM – 6:00 PM</li><li>Sun closed</li></ul></div>
+  <div><h4>Contact</h4><ul><li><a class="wa" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://www.instagram.com/zgym.me" target="_blank" rel="noopener">Instagram</a></li><li><span class="tbd">Add email</span></li></ul></div>
   <p class="fine">© 2026 Z-GYM. All rights reserved.</p>
 </footer>
+
+<a class="fab wa" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Chat with Z-GYM on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
 <script>
 (function(){
   var doc=document.documentElement, rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var $=function(s,c){return (c||document).querySelector(s)}, $$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
+
+  /* WhatsApp number: digits only with country code, e.g. 96170123456 */
+  var WHATSAPP='';
+  var WA_URL='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hi Z-GYM, I’d like to book a free session.');
+  $$('.wa').forEach(function(a){ a.href=WA_URL; });
+
+  /* scroll-lit statement */
+  var lit=$('#lit'), litW=lit.textContent.trim().split(/\s+/); lit.textContent='';
+  litW.forEach(function(w){ var s=document.createElement('span'); s.textContent=w; lit.append(s,' '); });
+  var litS=$$('span',lit);
 
   /* loader then hero entrance */
   var loader=$('#loader'), started=false;
@@ -389,8 +400,7 @@ footer a:hover{color:var(--accent)}
       var t=document.createElement('time'); t.textContent=s[0];
       var b=document.createElement('b'); b.textContent=s[1];
       var em=document.createElement('em'); em.textContent=s[2];
-      var a=document.createElement('a'); a.href='#join'; a.textContent='Book'; a.setAttribute('aria-label','Book '+s[1]+' at '+s[0]);
-      a.addEventListener('click',function(e){ e.preventDefault(); $('#join').scrollIntoView({behavior:rm?'auto':'smooth'}); });
+      var a=document.createElement('a'); a.href=WA_URL; a.target='_blank'; a.rel='noopener'; a.textContent='Book'; a.setAttribute('aria-label','Book '+s[1]+' at '+s[0]+' on WhatsApp');
       li.append(t,b,em,a); slots.appendChild(li);
     });
   }
@@ -408,6 +418,8 @@ footer a:hover{color:var(--accent)}
     drift+=.35;
     rows.forEach(function(r){ var d=+r.dataset.dir, w=r.firstElementChild.offsetWidth||1, x=((y*.45+drift)*d)%w; if(x>0) x-=w; r.style.transform='translate3d('+x+'px,0,0)'; });
     pars.forEach(function(el){ var b=el.parentNode.getBoundingClientRect(); if(b.bottom<-100||b.top>vh+100) return; var c=(b.top+b.height/2-vh/2); el.style.transform='translate3d(0,'+(-c*el.dataset.par)+'px,0)'; });
+    var lb=lit.getBoundingClientRect(), lp=Math.max(0,Math.min(1,(vh*.88-lb.top)/(vh*.5+lb.height))), ln=Math.round(lp*litS.length);
+    litS.forEach(function(s,i){ s.classList.toggle('on',i<ln); });
     hx+=(mx-hx)*.06; hy+=(my-hy)*.06;
     if(y<vh) heroBg.style.transform='translate3d('+(hx*-18)+'px,'+(hy*-12+y*.25)+'px,0)';
     requestAnimationFrame(frame);
